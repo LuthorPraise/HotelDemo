@@ -83,7 +83,7 @@
                 </div>
                 <div class="services-grid">
                     <div class="service-card animate-on-scroll">
-                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="service-image lazy-bg" data-bg="url('https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
                         <div class="service-content">
                             <i class="fas fa-bed"></i>
                             <h3>Rooms & Suites</h3>
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div class="service-card animate-on-scroll">
-                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="service-image lazy-bg" data-bg="url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
                         <div class="service-content">
                             <i class="fas fa-calendar-alt"></i>
                             <h3>Event Hosting</h3>
@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <div class="service-card animate-on-scroll">
-                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1566733971257-81c5ff279237?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="service-image lazy-bg" data-bg="url('https://images.unsplash.com/photo-1566733971257-81c5ff279237?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
                         <div class="service-content">
                             <i class="fas fa-glass-cheers"></i>
                             <h3>The Diamond Nightclub</h3>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <div class="service-card animate-on-scroll">
-                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="service-image lazy-bg" data-bg="url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
                         <div class="service-content">
                             <i class="fas fa-cocktail"></i>
                             <h3>Elite Bar Services</h3>
@@ -133,7 +133,7 @@
                         <a href="about.html" class="btn btn-secondary">Discover Our Story</a>
                     </div>
                     <div class="about-image animate-on-scroll">
-                        <img src="https://images.unsplash.com/photo-1551882547-ff43c61f3c33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hotel Architecture">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1551882547-ff43c61f3c33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hotel Architecture">
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
                         <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
                         <p>"The only place that truly understands what modern luxury feels like. The service is impeccable and the club is legendary."</p>
                         <div class="testimonial-user">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="James Wilson">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="James Wilson">
                             <div class="user-info">
                                 <h4>James Wilson</h4>
                                 <span>CEO, Horizon Tech</span>
@@ -161,7 +161,7 @@
                         <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
                         <p>"Hosted our product launch in the grand ballroom. The attention to detail and silver-service was beyond expectations."</p>
                         <div class="testimonial-user">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Elena Rodriguez">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Elena Rodriguez">
                             <div class="user-info">
                                 <h4>Elena Rodriguez</h4>
                                 <span>Fashion Director</span>
@@ -221,5 +221,22 @@
 
     <!-- Custom JS -->
     <script src="main.js"></script>
+    <!-- Lazy loading for background images -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const lazyBgImages = document.querySelectorAll('.lazy-bg');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bgUrl = entry.target.dataset.bg;
+                        entry.target.style.backgroundImage = bgUrl;
+                        entry.target.classList.remove('lazy-bg');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            lazyBgImages.forEach(img => imageObserver.observe(img));
+        });
+    </script>
 </body>
 </html>
