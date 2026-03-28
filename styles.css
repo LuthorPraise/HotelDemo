@@ -7,7 +7,10 @@
     --accent-silver: #A8B2D1;
     --transition: all 0.3s ease;
 }
-
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 * {
     margin: 0;
     padding: 0;
